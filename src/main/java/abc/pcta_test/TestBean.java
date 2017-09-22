@@ -17,18 +17,15 @@ import org.slf4j.LoggerFactory;
 @Transactional
 @OsgiServiceProvider(classes = TestService.class)
 public class TestBean implements TestService {
-    
-    private static final Logger LOG = LoggerFactory.getLogger(TestBean.class);
-    
-    @PersistenceContext(unitName="pcta-test")
-    private EntityManager em;
-    
+
+    private final InitRepository initRepository;
+
+    public TestBean(InitRepository initRepository) {
+        this.initRepository = initRepository;
+    }
+
     @PostConstruct
     public void init() {
-        em.persist(new TestEntity("Smasher"));
-        List l = em.createQuery("select T from TestEntity").getResultList();
-        for (Object o : l) {
-            LOG.info("Obtained " + ((TestEntity)o).toString());
-        }
+        initRepository.init();
     }
 }

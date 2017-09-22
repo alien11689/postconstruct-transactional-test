@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class TestEntity {
     
     @Id @GeneratedValue
-    private String id;
+    private Integer id;
     private String value;
     
     public TestEntity() {}
@@ -22,10 +22,10 @@ public class TestEntity {
         return "TestEntity[id=" + id + ", value=" + value + "]";
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
-    public void setI(String id) {
+    public void setI(Integer id) {
         this.id = id;
     }
     public String getValue() {
